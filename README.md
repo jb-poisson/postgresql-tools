@@ -104,6 +104,15 @@ PostgreSQLConditionBuilder::buildCondition([
     'date_min' => 'created_at',
     'date_max' => 'created_at',
 ]);
+
+// id_country = ANY (countries_array)
+PostgreSQLConditionBuilder::buildCondition([
+    'id_country' => 'FR',
+], 'AND', 'OR', [
+    'id_country' => 'ANY'
+], [
+    'id_country' => 'countries_array'
+]);
 ```
 
 #### Execute query (example with Doctrine DBAL)
