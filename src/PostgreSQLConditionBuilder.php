@@ -81,10 +81,7 @@ class PostgreSQLConditionBuilder
         $sqlParamKey = self::formatParamKey($key, $n);
 
         if ($comparator === 'ANY') {
-            if (is_int($value)) {
-                return "$value = ANY ($key_sql)";
-            }
-            return "'$value' = ANY ($key_sql)";
+            return ":$sqlParamKey=$comparator($key_sql)";
         }
 
         return "$key_sql$comparator:$sqlParamKey";
