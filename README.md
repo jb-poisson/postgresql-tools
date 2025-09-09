@@ -110,8 +110,6 @@ PostgreSQLConditionBuilder::buildCondition([
     'id_country' => 'FR',
 ], 'AND', 'OR', [
     'id_country' => 'ANY'
-], [
-    'id_country' => 'countries_array'
 ]);
 ```
 

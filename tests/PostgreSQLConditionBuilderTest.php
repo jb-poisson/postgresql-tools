@@ -63,12 +63,10 @@ class PostgreSQLConditionBuilderTest extends TestCase
             'created_at' => '!=',
         ])[0]);
 
-        $this->assertEquals("1=1 AND :id_country=ANY(countries_array)", $builder->buildCondition([
+        $this->assertEquals("1=1 AND :id_country=ANY(id_country)", $builder->buildCondition([
             'id_country' => 'FR',
         ], 'AND', 'OR', [
             'id_country' => 'ANY'
-        ], [
-            'id_country' => 'countries_array'
         ])[0]);
     }
 
