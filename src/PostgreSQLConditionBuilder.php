@@ -99,7 +99,7 @@ class PostgreSQLConditionBuilder
     private static function verifyComparisonOperators(array $comparisonOperators): void
     {
         foreach ($comparisonOperators as $value) {
-            if (!in_array($value, ['=', '>', '<', '>=', '<=', '<>', '!=', '?', 'LIKE', 'ILIKE', 'IN', 'NOT IN'])) {
+            if (!in_array($value, ['=', '>', '<', '>=', '<=', '<>', '!=', '?', '??', 'LIKE', 'ILIKE', 'IN', 'NOT IN'])) {
                 throw new Exception('Invalid operator: ' . $value);
             }
         }

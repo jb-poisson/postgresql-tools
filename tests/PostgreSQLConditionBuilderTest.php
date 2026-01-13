@@ -64,6 +64,12 @@ class PostgreSQLConditionBuilderTest extends TestCase
         ], 'AND', 'OR', [
             'created_at' => '!=',
         ])[0]);
+
+        $this->assertEquals("1=1 AND data??:data", $builder->buildCondition([
+            'data' => 'key',
+        ], 'AND', 'OR', [
+            'data' => '??',
+        ])[0]);
     }
 
     public function testBuildConditionParamsWithReplaces()
