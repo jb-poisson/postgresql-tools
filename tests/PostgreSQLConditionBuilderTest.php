@@ -1,12 +1,10 @@
 <?php
 
-
 use PHPUnit\Framework\TestCase;
 use SWouters\PostgreSQLTools\PostgreSQLConditionBuilder;
 
 class PostgreSQLConditionBuilderTest extends TestCase
 {
-
     public function testBuildCondition()
     {
         $builder = new PostgreSQLConditionBuilder();
@@ -70,6 +68,12 @@ class PostgreSQLConditionBuilderTest extends TestCase
         ], 'AND', 'OR', [
             'data' => '??',
         ])[0]);
+      
+        $this->assertEquals("1=1 AND :id_country=ANY(id_country)", $builder->buildCondition([
+            'id_country' => 'FR',
+        ], 'AND', 'OR', [
+            'id_country' => 'ANY'
+        ])[0]);
     }
 
     public function testBuildConditionParamsWithReplaces()
@@ -100,7 +104,6 @@ class PostgreSQLConditionBuilderTest extends TestCase
             'id1' => 2,
             'id2' => 3,
         ], $params);
-
     }
 
     public function testBadCondition()
@@ -128,5 +131,4 @@ class PostgreSQLConditionBuilderTest extends TestCase
             'id' => 'nono',
         ]);
     }
-
 }

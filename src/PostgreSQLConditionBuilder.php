@@ -80,6 +80,10 @@ class PostgreSQLConditionBuilder
         $comparator = $comparisonOperators[$key] ?? '=';
         $sqlParamKey = self::formatParamKey($key, $n);
 
+        if ($comparator === 'ANY') {
+            return ":$sqlParamKey=$comparator($key_sql)";
+        }
+
         return "$key_sql$comparator:$sqlParamKey";
     }
 
@@ -99,7 +103,7 @@ class PostgreSQLConditionBuilder
     private static function verifyComparisonOperators(array $comparisonOperators): void
     {
         foreach ($comparisonOperators as $value) {
-            if (!in_array($value, ['=', '>', '<', '>=', '<=', '<>', '!=', '?', '??', 'LIKE', 'ILIKE', 'IN', 'NOT IN'])) {
+            if (!in_array($value, ['=', '>', '<', '>=', '<=', '<>', '!=', '?', '??', 'LIKE', 'ILIKE', 'IN', 'NOT IN', 'ANY'])) {
                 throw new Exception('Invalid operator: ' . $value);
             }
         }
